@@ -25,6 +25,13 @@ void main() {
     expect(find.text("20% of tasks completed"), findsOneWidget);
 
     expect(find.text("App design for uper"), findsOneWidget);
+    final elevatedButtonFinder =
+        find.byWidgetPredicate((widget) => widget is ElevatedButton);
+    final finder  = find.widgetWithText(ElevatedButton, 'View all');
+    final widget = tester.firstWidget(finder)as ElevatedButton;
+    final state  = <MaterialState>{};
+    final bgColor = widget.style?.backgroundColor?.resolve(state);
+    expect(bgColor,  Colors.grey[300]);
     final textWidget = find.text("App design for uper");
     final positionedWidget = find.byType(Positioned);
     final containerWithImage = find.byWidgetPredicate((widget) =>
@@ -60,6 +67,8 @@ void main() {
     expect(hexContainer, findsOneWidget);
     expect(grayContainer, findsOneWidget);
     expect(containerWithImage, findsWidgets);
+    expect(elevatedButtonFinder, findsWidgets);
+
     expect((tester.widget(hexContainer) as Container).padding,
         equals(const EdgeInsets.all(20)));
     expect(
