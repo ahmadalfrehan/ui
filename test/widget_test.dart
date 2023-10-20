@@ -5,26 +5,47 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:io';
+
+import 'package:designtra/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:designtra/main.dart';
-
 void main() {
+  TestWidgetsFlutterBinding
+      .ensureInitialized(); // Ensure Flutter bindings are initialized
+  setUp(() {
+    // Mock network images to prevent actual network requests
+    TestWidgetsFlutterBinding.ensureInitialized();
+    HttpOverrides.global = null;
+    TestWidgetsFlutterBinding.ensureInitialized();
+  });
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text("Hi Lay!"), findsOneWidget);
+    expect(find.byIcon(Icons.info), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text("20% of tasks completed"), findsOneWidget);
+    // await tester.tap(find.byIcon(Icons.add));
+    final grayContainer = find.byWidgetPredicate((widget) =>
+        widget is Container &&
+        widget.decoration is BoxDecoration &&
+        (widget.decoration as BoxDecoration).borderRadius ==
+            BorderRadius.circular(20) &&
+        (widget.decoration as BoxDecoration).color == Colors.grey[300]);
+    final greenContainer = find.byWidgetPredicate((widget) =>
+        widget is Container &&
+        widget.decoration is BoxDecoration &&
+        (widget.decoration as BoxDecoration).borderRadius ==
+            BorderRadius.circular(20) &&
+        (widget.decoration as BoxDecoration).color == Colors.greenAccent);
+    expect(greenContainer, findsOneWidget);
+    expect(grayContainer, findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pumpWidget(const MyApp());
+
+    await tester.pumpAndSettle();
   });
 }
