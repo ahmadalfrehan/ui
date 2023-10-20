@@ -4,13 +4,15 @@ A Simple Flutter UI with Widget testing.
 
 ## Getting Started
 
-This project is designed flutter simple ui.
+This Flutter project is designed with a simple UI.
 
-with writing flutter widget testing for it 
+To start, run 
 
-get started by running flutter test in terminal 
+##"flutter test" 
 
-have a nice journey :)
+in your terminal,
+
+And let the journey begin. Enjoy the process!
 
 - [My Website](https://ahmadalfrehan.com)
 
