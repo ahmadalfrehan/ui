@@ -1,16 +1,16 @@
 # designtra
 
-A new Flutter project.
+A Simple Flutter UI with Widget testing.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is designed flutter simple ui.
 
-A few resources to get you started if this is your first Flutter project:
+with writing flutter widget testing for it 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+get started by running flutter test in terminal 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+have a nice journey :)
+
+- [My Website](https://ahmadalfrehan.com)
+
