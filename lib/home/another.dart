@@ -9,6 +9,7 @@ class Another extends GetView<Controller> {
   Widget build(BuildContext context) {
     final controller  = Get.put(Controller());
     return Scaffold(
+      backgroundColor: const Color(0xFF38393d),
       appBar: AppBar(
         backgroundColor: const Color(0xFF38393d),
         elevation: 0,
@@ -16,57 +17,109 @@ class Another extends GetView<Controller> {
       body: Container(
         padding: const EdgeInsets.all(10),
         color: const Color(0xFF38393d),
-        child: Column(
-          children: [
-            _row(),
-            const SizedBox(height: 20),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white54),
-                borderRadius: BorderRadius.circular(25),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _row(),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white54),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                          decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search, color: Colors.white54),
+                        label: Text(
+                          "Search Food ...",
+                          style: TextStyle(color: Colors.white54, fontSize: 17),
+                        ),
+                      )),
+                    ),
+                    Container(
+                      height: 40,
+                      width: 1.5,
+                      color: Colors.white54,
+                    ),
+                    const SizedBox(width: 15),
+                    const Icon(
+                      Icons.filter_list,
+                      color: Colors.white54,
+                    ),
+                    const SizedBox(width: 15),
+                  ],
+                ),
               ),
-              child: Row(
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                    child: TextFormField(
-                        decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: Colors.white54),
-                      label: Text(
-                        "Search Food ...",
-                        style: TextStyle(color: Colors.white54, fontSize: 17),
-                      ),
-                    )),
-                  ),
-                  Container(
-                    height: 40,
-                    width: 1.5,
-                    color: Colors.white54,
-                  ),
-                  const SizedBox(width: 15),
-                  const Icon(
-                    Icons.filter_list,
-                    color: Colors.white54,
-                  ),
-                  const SizedBox(width: 15),
+                  for (var i = 0; i < 3; i++) setTh(),
                 ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                for (var i = 0; i < 3; i++) setTh(),
-              ],
-            ),
-            ElevatedButton(onPressed: (){
-              controller.predictData();
-
-            }, child: Text("predict"),),
-          ],
+              20.height,
+              _textFormField(controller.LotArea, 'LotArea'),
+              15.height,
+              _textFormField(controller.YearBuilt, 'YearBuilt'),
+              15.height,
+              _textFormField(controller.stFlrSF, 'stFlrSF'),
+              15.height,
+              _textFormField(controller.ndFlrSF, 'ndFlrSF'),
+              15.height,
+              _textFormField(controller.FullBath, 'FullBath'),
+              15.height,
+              _textFormField(controller.BedroomAbvGr, 'BedroomAbvGr'),
+              15.height,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF38393d),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      side: BorderSide(color: Colors.white54)),
+                  fixedSize: Size(Get.width / 1.4, 40),
+                ),
+                onPressed: () {
+                  controller.predictData();
+                },
+                child: const Text("Predict"),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+extension EmptySpace on num {
+  SizedBox get height => SizedBox(height: toDouble());
+
+  SizedBox get width => SizedBox(width: toDouble());
+}
+
+_textFormField(TextEditingController textEditingController, String hint) {
+  return TextFormField(
+    controller: textEditingController,
+    decoration: InputDecoration(
+      hintText: hint,
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white54),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white54),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+            color: Colors.white54, style: BorderStyle.solid, width: 2),
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+  );
 }
 
 setTh() {
@@ -122,7 +175,7 @@ _row() {
               ),
               Text(
                 " Multan",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ],
           ),
