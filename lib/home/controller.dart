@@ -1,11 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,28 +15,19 @@ class Controller extends GetxController {
   RxInt TotRmsAbvGrd = 22.obs;
 
   predictData() async {
-    try {
-    print(json.encode({
-      "LotArea": LotArea.value,
-      "YearBuilt": YearBuilt.value,
-      "stFlrSF": stFlrSF.value,
-      "ndFlrSF": ndFlrSF.value,
-      "FullBath": FullBath.value,
-      "BedroomAbvGr": BedroomAbvGr.value,
-      "TotRmsAbvGrd": TotRmsAbvGrd.value
-    },));
+    // try {
       final response = await http.post(
         Uri.parse('http://127.0.0.1:8000/predict'),
         headers: {
           'Content-Type': 'application/json'
         },
         body: json.encode({
-          "LotArea": LotArea.value,
-          "YearBuilt": YearBuilt.value,
-          "stFlrSF": stFlrSF.value,
-          "ndFlrSF": ndFlrSF.value,
-          "FullBath": FullBath.value,
-          "BedroomAbvGr": BedroomAbvGr.value,
+          "LotArea": LotArea.text,
+          "YearBuilt": YearBuilt.text,
+          "stFlrSF": stFlrSF.text,
+          "ndFlrSF": ndFlrSF.text,
+          "FullBath": FullBath.text,
+          "BedroomAbvGr": BedroomAbvGr.text,
           "TotRmsAbvGrd": TotRmsAbvGrd.value
         },)
       );
@@ -49,8 +35,8 @@ class Controller extends GetxController {
       var data = json.decode(response.body);
       print(data);
       result.value = data['predicted_price']??0.0;
-    } catch (error) {
-      print(error);
-    }
+    // } catch (error) {
+    //   print(error);
+    // }/
   }
 }

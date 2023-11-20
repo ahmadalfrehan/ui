@@ -65,9 +65,9 @@ class Another extends GetView<Controller> {
               15.height,
               _textFormField(controller.YearBuilt, 'YearBuilt'),
               15.height,
-              _textFormField(controller.stFlrSF, 'stFlrSF'),
+              _textFormField(controller.stFlrSF, '1stFlrSF'),
               15.height,
-              _textFormField(controller.ndFlrSF, 'ndFlrSF'),
+              _textFormField(controller.ndFlrSF, '2ndFlrSF'),
               15.height,
               _textFormField(controller.FullBath, 'FullBath'),
               15.height,
@@ -75,10 +75,10 @@ class Another extends GetView<Controller> {
               15.height,
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF38393d),
+                  backgroundColor: const Color(0xFF38393d),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
-                      side: BorderSide(color: Colors.white54)),
+                      side: const BorderSide(color: Colors.white54)),
                   fixedSize: Size(Get.width / 1.4, 40),
                 ),
                 onPressed: () {
@@ -86,6 +86,13 @@ class Another extends GetView<Controller> {
                 },
                 child: const Text("Predict"),
               ),
+              Text(
+                'Result = ${controller.result.value}\$',
+                style: const TextStyle(
+                    color: Colors.white54,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w800),
+              )
             ],
           ),
         ),
@@ -104,17 +111,17 @@ _textFormField(TextEditingController textEditingController, String hint) {
   return TextFormField(
     controller: textEditingController,
     decoration: InputDecoration(
-      hintText: hint,
+      label: Text(hint),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.white54),
+        borderSide: const BorderSide(color: Colors.white54),
         borderRadius: BorderRadius.circular(15),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.white54),
+        borderSide: const BorderSide(color: Colors.white54),
         borderRadius: BorderRadius.circular(15),
       ),
       border: OutlineInputBorder(
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
             color: Colors.white54, style: BorderStyle.solid, width: 2),
         borderRadius: BorderRadius.circular(15),
       ),
