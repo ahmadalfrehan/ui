@@ -1,10 +1,13 @@
+import 'package:designtra/home/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Another extends StatelessWidget {
+class Another extends GetView<Controller> {
   const Another({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller  = Get.put(Controller());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF38393d),
@@ -54,7 +57,11 @@ class Another extends StatelessWidget {
               children: [
                 for (var i = 0; i < 3; i++) setTh(),
               ],
-            )
+            ),
+            ElevatedButton(onPressed: (){
+              controller.predictData();
+
+            }, child: Text("predict"),),
           ],
         ),
       ),
