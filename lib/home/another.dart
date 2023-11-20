@@ -86,12 +86,16 @@ class Another extends GetView<Controller> {
                 },
                 child: const Text("Predict"),
               ),
-              Text(
-                'Result = ${controller.result.value}\$',
-                style: const TextStyle(
-                    color: Colors.white54,
-                    fontSize: 19,
-                    fontWeight: FontWeight.w800),
+              Obx(
+                () => controller.isLoading.value
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        'Result = ${controller.result.value}\$',
+                        style: const TextStyle(
+                            color: Colors.white54,
+                            fontSize: 19,
+                            fontWeight: FontWeight.w800),
+                      ),
               )
             ],
           ),

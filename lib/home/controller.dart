@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class Controller extends GetxController {
+  RxBool isLoading = false.obs;
   TextEditingController LotArea = TextEditingController(text: '8450');
   TextEditingController YearBuilt = TextEditingController(text: '2003');
   TextEditingController stFlrSF = TextEditingController(text: '856');
@@ -15,28 +16,30 @@ class Controller extends GetxController {
   RxInt TotRmsAbvGrd = 22.obs;
 
   predictData() async {
-    // try {
-      final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/predict'),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: json.encode({
-          "LotArea": LotArea.text,
-          "YearBuilt": YearBuilt.text,
-          "stFlrSF": stFlrSF.text,
-          "ndFlrSF": ndFlrSF.text,
-          "FullBath": FullBath.text,
-          "BedroomAbvGr": BedroomAbvGr.text,
-          "TotRmsAbvGrd": TotRmsAbvGrd.value
-        },)
-      );
+    try {
+      isLoading.value = true;
+      final response =
+          await http.post(Uri.parse('http://127.0.0.1:8000/predict'),
+              headers: {'Content-Type': 'application/json'},
+              body: json.encode(
+                {
+                  "LotArea": LotArea.text,
+                  "YearBuilt": YearBuilt.text,
+                  "stFlrSF": stFlrSF.text,
+                  "ndFlrSF": ndFlrSF.text,
+                  "FullBath": FullBath.text,
+                  "BedroomAbvGr": BedroomAbvGr.text,
+                  "TotRmsAbvGrd": TotRmsAbvGrd.value
+                },
+              ));
       print(response.body);
       var data = json.decode(response.body);
       print(data);
-      result.value = data['predicted_price']??0.0;
-    // } catch (error) {
-    //   print(error);
-    // }/
+      result.value = data['predicted_price'] ?? 0.0;
+      isLoading.value = false;
+    } catch (error) {
+      print(error);
+      isLoading.value = false;
+    }
   }
 }
